@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+#signUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+label {
+  margin-bottom: 0.25rem;
+  color: #2c2d2a;
+}
+
+input + label {
+  margin-top: 2rem;
+}
+
+#signupFormContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 80%;
+  padding: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signupInput {
+  border-radius: 20px;
+  border: lightgray 1px solid;
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 7px -4px;
+}
+
+.formErrors {
+  color: red;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+}
+
+.errorPlaceholder {
+  height: 2rem;
+}
+
+#signupSubmitBtn {
+  padding: 0.5rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid #ce8d00;
+  background-color: #ffc700;
+  margin: auto auto;
+  cursor: pointer;
+  box-shadow: #2c2d2a 2px 2px 10px -5px;
+}
+
+#signupSubmitBtn:hover {
+  background-color: #ffde68;
+}
+
+.buttonDisabled {
+  cursor: not-allowed !important;
+  background-color: rgb(240, 240, 240) !important;
+  border: 1px solid #c2c2c2 !important;
+  box-shadow: #a0a0a0 2px 2px 10px -5px !important;
+}

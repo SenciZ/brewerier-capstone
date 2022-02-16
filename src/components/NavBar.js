@@ -5,25 +5,9 @@ import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { useWindowSize } from "./hooks/useWindowSize";
 
 function NavBar() {
-  const size = useWindowSize();
-  const [iconStatus, setIconStatus] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [menuClicked, setMenuClicked] = useState(null);
-
-  useEffect(() => {
-    if (window.innerWidth !== windowWidth) {
-      setWindowWidth(window.innerWidth);
-      if (window.innerWidth < 751) {
-        setIconStatus(true);
-        setMenuClicked(null);
-      } else if (window.innerWidth > 751) {
-        setIconStatus(false);
-      }
-    }
-  }, [size]);
+  const [menuClicked, setMenuClicked] = useState(false);
 
   return (
     <>
@@ -50,34 +34,31 @@ function NavBar() {
               </li>
             </ul>
           </div>
-          {iconStatus ? (
-            <FontAwesomeIcon
-              className="hamburger"
-              onClick={() => setMenuClicked(!menuClicked)}
-              icon={faBars}
-            />
-          ) : null}
+
+          <FontAwesomeIcon
+            className="hamburger"
+            onClick={() => setMenuClicked(!menuClicked)}
+            icon={faBars}
+          />
         </nav>
       </div>
-      {menuClicked ? (
-        <ul id="rightNavMobile">
-          <li className="listItemMobile">
-            <Link onClick={() => setMenuClicked(!menuClicked)} to="/about">
-              ABOUT
-            </Link>
-          </li>
-          <li className="listItemMobile">
-            <Link onClick={() => setMenuClicked(!menuClicked)} to="/signup">
-              SIGN UP
-            </Link>
-          </li>
-          <li className="listItemMobile listBtn">
-            <Link onClick={() => setMenuClicked(!menuClicked)} to="/login">
-              <button id="loginBtn">LOGIN</button>
-            </Link>
-          </li>
-        </ul>
-      ) : null}
+      <ul className="rightNavMobile" id={menuClicked ? null : "hidden"}>
+        <li className="listItemMobile">
+          <Link onClick={() => setMenuClicked(!menuClicked)} to="/about">
+            ABOUT
+          </Link>
+        </li>
+        <li className="listItemMobile">
+          <Link onClick={() => setMenuClicked(!menuClicked)} to="/signup">
+            SIGN UP
+          </Link>
+        </li>
+        <li className="listItemMobile listBtn">
+          <Link onClick={() => setMenuClicked(!menuClicked)} to="/login">
+            <button id="loginBtn">LOGIN</button>
+          </Link>
+        </li>
+      </ul>
     </>
   );
 }

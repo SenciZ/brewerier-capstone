@@ -8,7 +8,9 @@ function Home() {
         <div className="darkDiv">
           <span id="textContainer">
             <h2 id="searchEngineText">Brewerier is a brewery search engine.</h2>
-            <p id="instructionsText">search breweries near you below.</p>
+            <p id="instructionsText">
+              search breweries around the country below.
+            </p>
           </span>
         </div>
       </div>
