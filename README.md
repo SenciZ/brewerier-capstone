@@ -1,6 +1,6 @@
 # Brewerier
 
-Visit the live application: https://senciz.github.io/
+Visit the live application: https://senciz.github.io/brewerier-capstone
 
 ![Brewerier Screen Shot](https://github.com/SenciZ/brewerier-capstone/blob/main/resources/Brewerier.png?raw=true)
 
