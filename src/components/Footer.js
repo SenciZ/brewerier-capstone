@@ -16,21 +16,14 @@ function Footer() {
           </Link>
           <div id="rightNavContainer">
             <ul id="rightNav">
-              <li className="listItem border">
-                <Link to="/about">ABOUT</Link>
-              </li>
-              <li className="listItem border">
-                <Link to="/signup">SIGN UP</Link>
-              </li>
-              <li className="listItem listBtn">
-                <Link to="/login">
-                  <button id="loginBtn">LOGIN</button>
-                </Link>
+              <li className="listItem">
+                <Link to="/">HOME</Link>
               </li>
             </ul>
           </div>
         </nav>
       </div>
+      <div id="bottomFooter"></div>
     </footer>
   );
 }

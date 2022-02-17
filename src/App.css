@@ -6,9 +6,15 @@
 
 .app {
   width: 100%;
+  min-height: 100%;
   position: absolute;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main {
-  margin-bottom: 100px;
+  /* border: rgb(81, 255, 0) 1px solid; */
+  flex-grow: 1;
 }

@@ -1,9 +1,30 @@
+import "./SignUp.css";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import YupPassword from "yup-password";
+import axios from "axios";
 
-import "./SignUp.css";
+// const login = (body) =>
+//   axios
+//     .post(`${baseURL}/login`, body)
+//     .then((res) => {
+//       createUserCard(res.data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       alert("Whaat Uh oh. Your request did not work.");
+//     });
+// const register = (body) =>
+//   axios
+//     .post(`${baseURL}/register`, body)
+//     .then((res) => {
+//       createUserCard(res.data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       alert("Uh oh. Your request did not work.");
+//     });
+
 const SignUp = () => {
   const formik = useFormik({
     initialValues: {
@@ -32,7 +53,7 @@ const SignUp = () => {
         .matches(/^(?=.*[A-Z])/, "Must contain at least 1 uppercase letter")
         .matches(/^(?=.*[0-9])/, "Must contain at least 1 Number")
         .matches(
-          /^(?=.*[!@#\$%\^&\*])/,
+          /^(?=.*[!@#$%^&*])/,
           "Must contain at least 1 special character"
         )
         .min(8, "Must be at least 8 characters or more")
@@ -41,14 +62,17 @@ const SignUp = () => {
     }),
 
     onSubmit: (values) => {
-      const user = {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        username: values.username,
-        password: values.password,
-      };
-      console.log(user);
+      // const user = {
+      //   firstName: values.firstName,
+      //   lastName: values.lastName,
+      //   email: values.email,
+      //   username: values.username,
+      //   password: values.password,
+      // };
+      // console.log(user);
+      axios.post("/register", values).then((res) => {
+        console.log(res.data);
+      });
       formik.handleReset();
     },
   });
@@ -58,7 +82,11 @@ const SignUp = () => {
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="firstName">First Name:</label>
           <input
-            className="signupInput"
+            className={
+              formik.touched.firstName && formik.errors.firstName
+                ? "signupInput inputError"
+                : "signupInput"
+            }
             id="firstName"
             type="text"
             {...formik.getFieldProps("firstName")}
@@ -70,7 +98,11 @@ const SignUp = () => {
           </div>
           <label htmlFor="lastName">Last Name:</label>
           <input
-            className="signupInput"
+            className={
+              formik.touched.lastName && formik.errors.lastName
+                ? "signupInput inputError"
+                : "signupInput"
+            }
             id="lastName"
             type="text"
             {...formik.getFieldProps("lastName")}
@@ -82,7 +114,11 @@ const SignUp = () => {
           </div>
           <label htmlFor="email">Email Address:</label>
           <input
-            className="signupInput"
+            className={
+              formik.touched.email && formik.errors.email
+                ? "signupInput inputError"
+                : "signupInput"
+            }
             id="email"
             type="email"
             {...formik.getFieldProps("email")}
@@ -94,7 +130,11 @@ const SignUp = () => {
           </div>
           <label htmlFor="username">Username:</label>
           <input
-            className="signupInput"
+            className={
+              formik.touched.username && formik.errors.username
+                ? "signupInput inputError"
+                : "signupInput"
+            }
             id="username"
             type="text"
             {...formik.getFieldProps("username")}
@@ -106,7 +146,11 @@ const SignUp = () => {
           </div>
           <label htmlFor="password">Password:</label>
           <input
-            className="signupInput"
+            className={
+              formik.touched.password && formik.errors.password
+                ? "signupInput inputError"
+                : "signupInput"
+            }
             id="password"
             type="password"
             {...formik.getFieldProps("password")}

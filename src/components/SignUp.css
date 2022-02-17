@@ -14,7 +14,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 label {
@@ -32,6 +32,7 @@ input + label {
   max-width: 400px;
   width: 80%;
   padding: 1rem;
+  margin-top: 2rem;
 }
 
 form {
@@ -50,6 +51,10 @@ form {
   color: red;
   font-size: 0.75rem;
   padding: 0.25rem;
+}
+
+.inputError {
+  border: 1px red solid;
 }
 
 .errorPlaceholder {

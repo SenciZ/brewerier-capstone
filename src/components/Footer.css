@@ -10,9 +10,14 @@
 }
 
 footer {
+  background-color: #ffc700;
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
+  justify-self: flex-end;
+}
+
+#bottomFooter {
   background-color: #2c2d2a;
   padding: 2rem;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }

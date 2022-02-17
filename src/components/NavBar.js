@@ -4,7 +4,7 @@ import beerMug from "../images/beerMug.png";
 import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function NavBar() {
   const [menuClicked, setMenuClicked] = useState(false);
@@ -27,6 +27,7 @@ function NavBar() {
               <li className="listItem border">
                 <Link to="/signup">SIGN UP</Link>
               </li>
+
               <li className="listItem listBtn">
                 <Link to="/login">
                   <button id="loginBtn">LOGIN</button>
