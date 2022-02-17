@@ -13,7 +13,7 @@ function NavBar() {
     <>
       <div id="navBarContainer">
         <nav id="navBar">
-          <Link to="/">
+          <Link to="/home">
             <span id="logoHolder">
               <img alt="Beer Mug Logo" src={beerMug} />
               <h1 id="logoFont">BREWERIER</h1>
