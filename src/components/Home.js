@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import Search from "./Search";
-function Home() {
+function Home({ isLoggedIn, userId }) {
   return (
     <>
       <div id="homeHero">
@@ -14,7 +14,7 @@ function Home() {
           </span>
         </div>
       </div>
-      <Search />
+      <Search isLoggedIn={isLoggedIn} userId={userId} />
     </>
   );
 }

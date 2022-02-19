@@ -17,11 +17,11 @@ function Footer() {
           <span>
             <a
               href="https://www.linkedin.com/in/senad-zenkovic/"
-              class="fab fa-linkedin"
+              className="fab fa-linkedin"
             ></a>
           </span>
           <span>
-            <a href="https://github.com/SenciZ" class="fab fa-github"></a>
+            <a href="https://github.com/SenciZ" className="fab fa-github"></a>
           </span>
         </div>
       </nav>

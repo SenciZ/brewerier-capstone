@@ -3,30 +3,10 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-// const login = (body) =>
-//   axios
-//     .post(`${baseURL}/login`, body)
-//     .then((res) => {
-//       createUserCard(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       alert("Whaat Uh oh. Your request did not work.");
-//     });
-// const register = (body) =>
-//   axios
-//     .post(`${baseURL}/register`, body)
-//     .then((res) => {
-//       createUserCard(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       alert("Uh oh. Your request did not work.");
-//     });
-
-const Login = () => {
+const Login = ({ setUserHandler, setLoggedInHandler }) => {
+  let navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -39,8 +19,11 @@ const Login = () => {
     }),
 
     onSubmit: (values) => {
-      axios.get("/login", values).then((res) => {
+      axios.post("/login", values).then((res) => {
         console.log(res.data);
+        setUserHandler(res.data);
+        setLoggedInHandler();
+        navigate("/dashboard");
       });
       formik.handleReset();
     },

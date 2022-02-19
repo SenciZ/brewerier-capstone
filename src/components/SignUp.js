@@ -1,31 +1,22 @@
 import "./SignUp.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-
-// const login = (body) =>
-//   axios
-//     .post(`${baseURL}/login`, body)
-//     .then((res) => {
-//       createUserCard(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       alert("Whaat Uh oh. Your request did not work.");
-//     });
-// const register = (body) =>
-//   axios
-//     .post(`${baseURL}/register`, body)
-//     .then((res) => {
-//       createUserCard(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       alert("Uh oh. Your request did not work.");
-//     });
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
+  let navigateTo = useNavigate();
+  const [didSignUp, setDidSignUp] = useState(false);
+
+  useEffect(() => {
+    if (didSignUp === true) {
+      navigateTo("/login");
+    } else {
+      return;
+    }
+  }, [didSignUp, navigateTo]);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -70,10 +61,14 @@ const SignUp = () => {
       //   password: values.password,
       // };
       // console.log(user);
-      axios.post("/register", values).then((res) => {
-        console.log(res.data);
-      });
-      formik.handleReset();
+      axios
+        .post("/register", values)
+        .then((res) => {
+          console.log(res.data);
+          setDidSignUp(true);
+          formik.handleReset();
+        })
+        .catch((err) => setDidSignUp(false));
     },
   });
   return (

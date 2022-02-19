@@ -9,7 +9,7 @@ import {
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Search() {
+function Search({ isLoggedIn, userId }) {
   const [breweries, setBreweries] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
@@ -33,6 +33,40 @@ function Search() {
         .catch((err) => console.log(err));
     }
   }, [searchWord, pageNumber]);
+
+  const addToBrewListHandler = (e) => {
+    const brewery = {
+      name: e.target.parentElement.parentElement.children[1].textContent,
+      image: e.target.parentElement.parentElement.children[0].src,
+      location: e.target.parentElement.parentElement.children[2].textContent,
+      // website: e.target.parentElement.parentElement.children[3].textContent,
+      userId: userId,
+      visited: false,
+    };
+    axios
+      .post("/addToBrewList", brewery)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const addToBeenListHandler = (e) => {
+    const brewery = {
+      name: e.target.parentElement.parentElement.children[1].textContent,
+      image: e.target.parentElement.parentElement.children[0].src,
+      location: e.target.parentElement.parentElement.children[2].textContent,
+      // website: e.target.parentElement.parentElement.children[3].textContent,
+      userId: userId,
+      visited: true,
+    };
+    axios
+      .post("/addToBrewList", brewery)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err, brewery));
+  };
 
   return (
     <div className="search">
@@ -69,7 +103,7 @@ function Search() {
       )}
       <div className="cardContainer">
         {breweries.map((item, index) => (
-          <div className="breweryCard" key={index}>
+          <div className="breweryCard" key={index} id={item.id}>
             {!item.website_url && (
               <img
                 className="breweryLogo"
@@ -88,9 +122,28 @@ function Search() {
               ></img>
             )}
             <h3 className="breweryName">{item.name}</h3>
-            <h4>
-              {item.city}, {item.state}
-            </h4>
+            <h4>{`${item.city}, ${item.state}`}</h4>
+            {isLoggedIn ? (
+              <div className="wishListHolder">
+                <button
+                  onClick={(e) => addToBeenListHandler(e)}
+                  className="addFavoriteBtn"
+                >
+                  Add To BeenList
+                </button>
+                <button
+                  onClick={(e) => addToBrewListHandler(e)}
+                  className="addFavoriteBtn"
+                >
+                  Add To BrewList
+                </button>
+              </div>
+            ) : null}
+            <h5>
+              <a className="brewWebsite" target="blank" href={item.website_url}>
+                {item.website_url}
+              </a>
+            </h5>
           </div>
         ))}
       </div>

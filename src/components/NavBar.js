@@ -4,10 +4,19 @@ import beerMug from "../images/beerMug.png";
 import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function NavBar() {
+function NavBar({ currentuser, isLoggedIn, setLoggedOutHandler }) {
   const [menuClicked, setMenuClicked] = useState(false);
+
+  // let name = localStorage.getItem("name");
+  // useEffect(() => {
+  //   name = localStorage.getItem("name");
+  // }, [loggedStatus]);
+
+  // useEffect(() => {
+  //   return () => {};
+  // }, [user]);
 
   return (
     <>
@@ -19,22 +28,42 @@ function NavBar() {
               <h1 id="logoFont">BREWERIER</h1>
             </span>
           </Link>
-          <div id="rightNavContainer">
-            <ul id="rightNav">
-              <li className="listItem border">
-                <Link to="/about">ABOUT</Link>
-              </li>
-              <li className="listItem border">
-                <Link to="/signup">SIGN UP</Link>
-              </li>
+          {isLoggedIn ? (
+            <div id="rightNavContainer">
+              <ul id="rightNav">
+                <li className="listItem border">
+                  <Link to="/about">ABOUT</Link>
+                </li>
+                <li className="listItem border">
+                  <Link to="/dashboard">MY BREWERIES</Link>
+                </li>
+                <li className="listItem listBtn">
+                  <Link to="/home">
+                    <button id="loginBtn" onClick={setLoggedOutHandler}>
+                      LOGOUT
+                    </button>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div id="rightNavContainer">
+              <ul id="rightNav">
+                <li className="listItem border">
+                  <Link to="/about">ABOUT</Link>
+                </li>
+                <li className="listItem border">
+                  <Link to="/signup">SIGN UP</Link>
+                </li>
 
-              <li className="listItem listBtn">
-                <Link to="/login">
-                  <button id="loginBtn">LOGIN</button>
-                </Link>
-              </li>
-            </ul>
-          </div>
+                <li className="listItem listBtn">
+                  <Link to="/login">
+                    <button id="loginBtn">LOGIN</button>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
 
           <FontAwesomeIcon
             className="hamburger"

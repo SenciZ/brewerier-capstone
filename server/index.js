@@ -46,8 +46,43 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/login", (req, res) => {
-  const { userName, password } = req.body;
+app.post("/addToBrewList", async (req, res) => {
+  const { name, image, location, userId, visited } = req.body;
+
+  sequelize.query(
+    `INSERT INTO user_brewerylist(user_id, brewery_name,brewery_logo, brewery_location, brewery_visited)
+      VALUES('${userId}','${name}','${image}','${location}','${visited}')`
+  );
+  res.status(200).send("Added Brewery");
+});
+
+app.get("/getBrewList", async (req, res) => {
+  const { userId } = req.body;
+  const brewList = await sequelize.query(
+    `SELECT * FROM user_brewerylist WHERE user_id = '1'`
+  );
+  res.status(200).send(brewList);
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const validUser = await sequelize.query(
+    `SELECT * FROM users WHERE user_username = '${username}'`
+  );
+  if (validUser[1].rowCount === 1) {
+    if (bcrypt.compareSync(password, validUser[0][0].user_crypted_password)) {
+      let userObject = {
+        id: validUser[0][0].user_id,
+        name: validUser[0][0].user_first_name,
+        email: validUser[0][0].user_username,
+      };
+      res.status(200).send(userObject);
+    } else {
+      res.status(401).send("Password is Incorrect");
+    }
+  } else {
+    res.status(401).send("Username is incorrect");
+  }
 });
 
 app.listen(PORT, () =>
