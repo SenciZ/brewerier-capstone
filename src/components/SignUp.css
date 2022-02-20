@@ -8,6 +8,14 @@
   text-decoration: none;
   list-style: none;
 }
+#signupLoginTextLink {
+  color: rgb(66, 91, 255);
+}
+#signupLoginText {
+  font-size: 0.75rem;
+  align-self: center;
+  margin-top: 1rem;
+}
 
 #signUp {
   display: flex;
@@ -20,6 +28,7 @@
 label {
   margin-bottom: 0.25rem;
   color: #2c2d2a;
+  font-size: 0.85rem;
 }
 
 input + label {

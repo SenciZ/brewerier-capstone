@@ -1,0 +1,40 @@
+#aboutContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0rem;
+}
+
+#aboutContent {
+  width: 90%;
+  max-width: 700px;
+  z-index: -1;
+}
+#aboutHeading {
+  font-size: 3rem;
+  color: slategrey;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+#aboutContent p {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  margin-top: 1rem;
+}
+
+#aboutContent h3 {
+  margin-top: 2rem;
+  color: #2c2d2a;
+}
+
+#beerImageHolder {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  height: 25vh;
+  width: 100%;
+  margin-top: 2rem;
+}

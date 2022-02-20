@@ -17,6 +17,7 @@ a {
   background-color: #ffc700;
   width: 100%;
   display: flex;
+  z-index: 20;
 }
 
 #navBar {

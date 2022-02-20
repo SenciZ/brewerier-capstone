@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   let navigateTo = useNavigate();
@@ -174,6 +174,14 @@ const SignUp = () => {
           >
             Submit
           </button>
+          <p id="signupLoginText">
+            Already have an account?{" "}
+            <span>
+              <Link id="signupLoginTextLink" to="/login">
+                Sign In here.
+              </Link>
+            </span>
+          </p>
         </form>
       </div>
     </div>

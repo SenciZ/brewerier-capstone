@@ -1,4 +1,5 @@
 import "./SignUp.css";
+import "./Login.css";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -84,10 +85,12 @@ const Login = ({ setUserHandler, setLoggedInHandler }) => {
             Submit
           </button>
         </form>
-        <p className="">
+        <p id="signupLoginText">
           Dont have an account?{" "}
           <span>
-            <Link to="/signup">Sign Up here.</Link>
+            <Link id="signupLoginTextLink" to="/signup">
+              Sign Up here.
+            </Link>
           </span>
         </p>
       </div>
