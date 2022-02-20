@@ -55,7 +55,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3100",
   "devDependencies": {
     "gh-pages": "^3.2.3"
   }
