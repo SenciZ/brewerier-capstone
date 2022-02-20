@@ -24,6 +24,8 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
 //endpoints
 app.post("/register", async (req, res) => {
   //destructuring req.body in order to have variables for query
