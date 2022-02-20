@@ -12,11 +12,13 @@ import { useState } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  let currentuserId;
 
   const setUserHandler = (info) => {
     const userName = info.name;
     const userId = info.id;
     const userEmail = info.email;
+    currentuserId = info.id;
     setUser({ id: userId, name: userName, email: userEmail });
     console.log(user);
   };

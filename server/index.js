@@ -26,15 +26,22 @@ app.use(cors());
 
 //endpoints
 app.post("/register", async (req, res) => {
+  //destructuring req.body in order to have variables for query
   const { firstName, lastName, email, username, password } = req.body;
+  //getting all entries in db where the username is the same as username provided from req.body
   const checkUser = await sequelize.query(
     `SELECT * FROM users WHERE user_username = '${username}'`
   );
+  //if query returns more than 0 rows that means name is already in there and taken
   if (checkUser[1].rowCount !== 0) {
     res.status(401).send("Username is already taken.");
+    //otherwise take the provided info and enter it into db
   } else {
+    //creating a salt for hashing the password to be stored
     const salt = bcrypt.genSaltSync(10);
+    //create new variable with the salted pasasword
     const passwordHash = bcrypt.hashSync(password, salt);
+    //enter info into db but store the hashedpassword instead of actual password
     await sequelize.query(
       `INSERT INTO users(user_first_name, user_last_name,user_username, user_email, user_crypted_password)
       VALUES('${firstName}','${lastName}','${username}','${email}','${passwordHash}')`
@@ -42,10 +49,11 @@ app.post("/register", async (req, res) => {
     const userInfo = await sequelize.query(
       `SELECT user_first_name FROM users WHERE user_username ='${username}'`
     );
+    //return some info to the front end to use
     res.status(200).send(userInfo);
   }
 });
-
+//
 app.post("/addToBrewList", async (req, res) => {
   const { name, image, location, userId, visited } = req.body;
 
@@ -56,10 +64,11 @@ app.post("/addToBrewList", async (req, res) => {
   res.status(200).send("Added Brewery");
 });
 
-app.get("/getBrewList", async (req, res) => {
+app.post("/getBrewList", async (req, res) => {
+  console.log(req.body);
   const { userId } = req.body;
   const brewList = await sequelize.query(
-    `SELECT * FROM user_brewerylist WHERE user_id = '1'`
+    `SELECT * FROM user_brewerylist WHERE user_id = '${userId}'`
   );
   res.status(200).send(brewList);
 });

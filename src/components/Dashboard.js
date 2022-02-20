@@ -6,18 +6,18 @@ import axios from "axios";
 function Dashboard({ currentuser }) {
   const [userBrewList, setUserBrewList] = useState([]);
 
-  useEffect(() => {
-    if (currentuser) {
-      axios
-        .get(`/getBrewList`, currentuser.id)
-        .then((res) => {
-          const brewList = res.data[0];
-          console.log(res.data);
-          setUserBrewList(brewList);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [currentuser]);
+  const getList = () => {
+    console.log(currentuser.id);
+    let userId = currentuser.id;
+    axios
+      .post(`/getBrewList`, { userId })
+      .then((res) => {
+        const brewList = res.data[0];
+        console.log(res.data);
+        setUserBrewList(brewList);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div id="dashboardBodyContainer">
@@ -25,7 +25,7 @@ function Dashboard({ currentuser }) {
         <div id="dashboardNavContainer">
           {currentuser && <h2>Hello {currentuser.name}</h2>}
           <div id="dashboardNavBtnContainer">
-            <button className="dashboardBeenBrewListBtn">
+            <button onClick={getList} className="dashboardBeenBrewListBtn">
               VIEW MY BEENLIST
             </button>
             <button className="dashboardBeenBrewListBtn">
