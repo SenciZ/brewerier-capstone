@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 3100;
 // const ctrl = require("./controller");
 require("dotenv").config();
 
-const { CONNECTION_STRING } = process.env;
+const { DATABASE_URL } = process.env;
 
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize(CONNECTION_STRING, {
+const sequelize = new Sequelize(DATABASE_URL, {
   dialect: "postgres",
   dialectOptions: {
     ssl: {
@@ -24,7 +24,10 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static(path.resolve(__dirname, "../build")));
+
 //endpoints
+
 app.post("/register", async (req, res) => {
   //destructuring req.body in order to have variables for query
   const { firstName, lastName, email, username, password } = req.body;
@@ -92,6 +95,10 @@ app.post("/login", async (req, res) => {
   } else {
     res.status(401).send("Username is incorrect");
   }
+});
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 app.listen(PORT, () =>

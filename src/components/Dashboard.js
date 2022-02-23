@@ -2,8 +2,11 @@ import React from "react";
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard({ currentuser }) {
+  const navigate = useNavigate();
+
   const [userBrewList, setUserBrewList] = useState([]);
 
   const getList = () => {
