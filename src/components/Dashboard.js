@@ -9,11 +9,24 @@ function Dashboard({ currentuser }) {
 
   const [userBrewList, setUserBrewList] = useState([]);
 
-  const getList = () => {
+  const getBrewList = () => {
     console.log(currentuser.id);
     let userId = currentuser.id;
     axios
       .post(`/getBrewList`, { userId })
+      .then((res) => {
+        const brewList = res.data[0];
+        console.log(res.data);
+        setUserBrewList(brewList);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getBeenList = () => {
+    console.log(currentuser.id);
+    let userId = currentuser.id;
+    axios
+      .post(`/getBeenList`, { userId })
       .then((res) => {
         const brewList = res.data[0];
         console.log(res.data);
@@ -28,10 +41,10 @@ function Dashboard({ currentuser }) {
         <div id="dashboardNavContainer">
           {currentuser && <h2>Hello {currentuser.name}</h2>}
           <div id="dashboardNavBtnContainer">
-            <button onClick={getList} className="dashboardBeenBrewListBtn">
+            <button onClick={getBeenList} className="dashboardBeenBrewListBtn">
               VIEW MY BEENLIST
             </button>
-            <button className="dashboardBeenBrewListBtn">
+            <button onClick={getBrewList} className="dashboardBeenBrewListBtn">
               VIEW MY BREWLIST
             </button>
           </div>

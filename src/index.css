@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 html {
   min-height: 100%;
 }

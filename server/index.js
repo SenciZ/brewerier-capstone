@@ -71,9 +71,18 @@ app.post("/getBrewList", async (req, res) => {
   console.log(req.body);
   const { userId } = req.body;
   const brewList = await sequelize.query(
-    `SELECT * FROM user_brewerylist WHERE user_id = '${userId}'`
+    `SELECT * FROM user_brewerylist WHERE user_id = '${userId}' AND brewery_visited = 'false'`
   );
   res.status(200).send(brewList);
+});
+
+app.post("/getBeenList", async (req, res) => {
+  console.log(req.body);
+  const { userId } = req.body;
+  const beenList = await sequelize.query(
+    `SELECT * FROM user_brewerylist WHERE user_id = '${userId}' AND brewery_visited = 'true'`
+  );
+  res.status(200).send(beenList);
 });
 
 app.post("/login", async (req, res) => {
