@@ -8,6 +8,29 @@ function Dashboard({ currentuser }) {
   const navigate = useNavigate();
 
   const [userBrewList, setUserBrewList] = useState([]);
+  const [brewNumber, setBrewNumber] = useState(0);
+  const [beenNumber, setBeenNumber] = useState(0);
+  const [showNumbers, setShowNumbers] = useState(true);
+
+  useEffect(() => {
+    let userId = currentuser.id;
+    axios
+      .post(`/getBrewList`, { userId })
+      .then((res) => {
+        const brewListNum = res.data[1].rowCount;
+        console.log(res.data);
+        setBrewNumber(brewListNum);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .post(`/getBeenList`, { userId })
+      .then((res) => {
+        const beenListNum = res.data[1].rowCount;
+        console.log(res.data);
+        setBeenNumber(beenListNum);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const getBrewList = () => {
     console.log(currentuser.id);
@@ -18,6 +41,7 @@ function Dashboard({ currentuser }) {
         const brewList = res.data[0];
         console.log(res.data);
         setUserBrewList(brewList);
+        setShowNumbers(false);
       })
       .catch((err) => console.log(err));
   };
@@ -31,6 +55,7 @@ function Dashboard({ currentuser }) {
         const brewList = res.data[0];
         console.log(res.data);
         setUserBrewList(brewList);
+        setShowNumbers(false);
       })
       .catch((err) => console.log(err));
   };
@@ -51,6 +76,19 @@ function Dashboard({ currentuser }) {
         </div>
       </div>
       <div className="cardContainer">
+        {showNumbers && (
+          <div id="breweryNumberDisplayHolder">
+            <div className="breweryNumberDisplay">
+              <h2>{brewNumber}</h2>
+              <p>Breweries in your BrewList</p>
+            </div>
+            <div className="breweryNumberDisplay">
+              <h2>{beenNumber}</h2>
+              <p>Breweries in your BeenList</p>
+            </div>
+          </div>
+        )}
+
         {userBrewList.map((item, index) => (
           <div className="breweryCard" key={index} id={item.id}>
             {!item.website_url && (

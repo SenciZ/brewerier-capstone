@@ -44,3 +44,35 @@
   padding: 0.25rem;
   margin-left: 1rem;
 }
+
+#breweryNumberDisplayHolder {
+  /* background-color: aqua; */
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#breweryNumberDisplayHolder > .breweryNumberDisplay > h2 {
+  color: #ffc700;
+  font-size: 3rem;
+}
+
+#breweryNumberDisplayHolder > .breweryNumberDisplay > p {
+  color: #2c2d2a8a;
+  font-size: 1rem;
+}
+
+.breweryNumberDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  border: 1px rgb(224, 224, 224) solid;
+  box-shadow: rgba(128, 128, 128, 0.5) 3px 3px 10px -5px;
+  background-color: #ffffff;
+}

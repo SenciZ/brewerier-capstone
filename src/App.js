@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import BeenList from "./components/BeenList";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 
@@ -47,7 +48,12 @@ function App() {
             element={<Home isLoggedIn={isLoggedIn} userId={user.id} />}
           />
           <Route path="about" element={<About />} />
-          <Route path="dashboard" element={<Dashboard currentuser={user} />} />
+          <Route path="dashboard" element={<Dashboard currentuser={user} />}>
+            <Route
+              path="dashboard/beenlist"
+              element={<BeenList currentuser={user} />}
+            />
+          </Route>
           <Route
             path="login"
             element={
