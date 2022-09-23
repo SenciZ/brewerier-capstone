@@ -11,6 +11,7 @@ function Dashboard({ currentuser }) {
   const [brewNumber, setBrewNumber] = useState(0);
   const [beenNumber, setBeenNumber] = useState(0);
   const [showNumbers, setShowNumbers] = useState(true);
+  const [ loadingState, setLoadingState ] = useState(false);
 
   useEffect(() => {
     let userId = currentuser.id;
@@ -33,6 +34,7 @@ function Dashboard({ currentuser }) {
   }, []);
 
   const getBrewList = () => {
+    setLoadingState(true);
     console.log(currentuser.id);
     let userId = currentuser.id;
     axios
@@ -42,11 +44,13 @@ function Dashboard({ currentuser }) {
         console.log(res.data);
         setUserBrewList(brewList);
         setShowNumbers(false);
+        setLoadingState(false);
       })
       .catch((err) => console.log(err));
   };
 
   const getBeenList = () => {
+    setLoadingState(true);
     console.log(currentuser.id);
     let userId = currentuser.id;
     axios
@@ -56,6 +60,7 @@ function Dashboard({ currentuser }) {
         console.log(res.data);
         setUserBrewList(brewList);
         setShowNumbers(false);
+        setLoadingState(false);
       })
       .catch((err) => console.log(err));
   };
@@ -88,7 +93,7 @@ function Dashboard({ currentuser }) {
             </div>
           </div>
         )}
-
+        { !!loadingState && <p>Items Loading</p>}
         {userBrewList.map((item, index) => (
           <div className="breweryCard" key={index} id={item.id}>
             {!item.website_url && (
