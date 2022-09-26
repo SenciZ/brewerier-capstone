@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 function Dashboard({ currentuser }) {
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ function Dashboard({ currentuser }) {
             </div>
           </div>
         )}
-        { !!loadingState && <p>Items Loading</p>}
+        { !!loadingState && <LoadingSpinner />}
         {userBrewList.map((item, index) => (
           <div className="breweryCard" key={index} id={item.id}>
             {!item.website_url && (
