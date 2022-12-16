@@ -5,9 +5,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
+import { useState } from "react";
 
 const Login = ({ setUserHandler, setLoggedInHandler }) => {
   let navigate = useNavigate();
+  const [hasLoaded, setHasLoaded] = useState(true)
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -20,17 +23,26 @@ const Login = ({ setUserHandler, setLoggedInHandler }) => {
     }),
 
     onSubmit: (values) => {
+      setHasLoaded(false)
       axios.post("/login", values).then((res) => {
-        console.log(res.data);
         setUserHandler(res.data);
         setLoggedInHandler();
+        setHasLoaded(true);
         navigate("/dashboard");
+      }).catch(err => {
+        setHasLoaded(true);
+
+        console.log(err.message)
+        if(err.message === 'Request failed with status code 401'){
+          formik.errors.password 
+        }
       });
-      formik.handleReset();
+      // formik.handleReset();
     },
   });
   return (
     <div id="signUp">
+      { !hasLoaded && <LoadingSpinner classy='loading-spp'/>}
       <div id="signupFormContainer">
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="username">Username:</label>

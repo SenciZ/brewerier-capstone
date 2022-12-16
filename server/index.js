@@ -102,7 +102,7 @@ app.post("/login", async (req, res) => {
       res.status(401).send("Password is Incorrect");
     }
   } else {
-    res.status(401).send("Username is incorrect");
+    res.status(402).send("Username is incorrect");
   }
 });
 

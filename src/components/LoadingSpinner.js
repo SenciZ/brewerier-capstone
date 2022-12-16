@@ -1,9 +1,11 @@
 import React from 'react'
-import './LoadingSpiner.css'
+import './LoadingSpinner.css'
 
-function LoadingSpinner() {
+function LoadingSpinner({classy}) {
   return (
-    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    <div className={classy}>
+      <div className={`lds-ring`}><div></div><div></div></div>
+    </div>
   )
 }
 

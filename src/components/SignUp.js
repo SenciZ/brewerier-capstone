@@ -4,10 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 const SignUp = () => {
   let navigateTo = useNavigate();
   const [didSignUp, setDidSignUp] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   useEffect(() => {
     if (didSignUp === true) {
@@ -53,6 +55,7 @@ const SignUp = () => {
     }),
 
     onSubmit: (values) => {
+      setIsSigningUp(true);
       // const user = {
       //   firstName: values.firstName,
       //   lastName: values.lastName,
@@ -66,6 +69,7 @@ const SignUp = () => {
         .then((res) => {
           console.log(res.data);
           setDidSignUp(true);
+          setIsSigningUp(false)
           formik.handleReset();
         })
         .catch((err) => setDidSignUp(false));
@@ -73,6 +77,8 @@ const SignUp = () => {
   });
   return (
     <div id="signUp">
+
+     {isSigningUp && <LoadingSpinner classy='loading-spp'/>} 
       <div id="signupFormContainer">
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="firstName">First Name:</label>

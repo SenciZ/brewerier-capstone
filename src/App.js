@@ -39,7 +39,7 @@ function App() {
         setLoggedOutHandler={setLoggedOutHandler}
       />
       <main>
-        <Routes>
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/brewerier-capstone" element={<Home />} />
           <Route
