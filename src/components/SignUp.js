@@ -9,6 +9,7 @@ import LoadingSpinner from "./LoadingSpinner";
 const SignUp = () => {
   let navigateTo = useNavigate();
   const [didSignUp, setDidSignUp] = useState(false);
+  const [signupError, setSignupError] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   useEffect(() => {
@@ -67,17 +68,33 @@ const SignUp = () => {
       axios
         .post("/register", values)
         .then((res) => {
-          console.log(res.data);
-          setDidSignUp(true);
-          setIsSigningUp(false)
+          if (res.status !== 200) {
+
+            setTimeout(()=>{
+              setIsSigningUp(false)
+              setSignupError(true);
+              setDidSignUp(false)
+            }, 2000);
+            return;
+          } 
+          // console.log(res.data);
+          // setDidSignUp(true);
+          // setIsSigningUp(false)
           formik.handleReset();
         })
-        .catch((err) => setDidSignUp(false));
+        .catch((err) => {
+          setTimeout(()=>{
+            setIsSigningUp(false)
+            setSignupError(true);
+            setDidSignUp(false)
+            formik.handleReset();
+          }, 2000);
+        });
     },
   });
   return (
     <div id="signUp">
-
+      {!!signupError && <h1>Sign Up Failed. Please Try Again</h1>}
      {isSigningUp && <LoadingSpinner classy='loading-spp'/>} 
       <div id="signupFormContainer">
         <form onSubmit={formik.handleSubmit}>

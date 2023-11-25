@@ -34,7 +34,6 @@ const Login = ({ setUserHandler, setLoggedInHandler }) => {
 
         console.log(err.message)
         if(err.message === 'Request failed with status code 401'){
-          formik.errors.password 
         }
       });
       // formik.handleReset();
